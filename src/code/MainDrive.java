@@ -1,7 +1,10 @@
 package code;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -39,7 +42,8 @@ public class MainDrive {
 				addPhoneNum();
 
 			} else if (userInput == 2) {
-//			TODO - 모든 전화번호 목록 출력
+
+				readPhoneNums();
 
 			} else {
 				System.out.println("잘못된 입력입니다.");
@@ -102,6 +106,42 @@ public class MainDrive {
 		
 		
 		
+		
+		
+	}
+	
+	static void readPhoneNums() {
+		
+		File myFile = new File("ohineBook.csv");
+		
+		try {
+			FileReader fr = new FileReader(myFile);
+			BufferedReader br = new BufferedReader(fr);
+			
+			while (true) {
+				
+				String contentLine = br.readLine();
+				
+				if (contentLine == null) {
+					System.out.println("목록 전부 불러옴");
+					break;
+					
+				}
+				System.out.println(contentLine);
+				
+			}
+			
+			br.close();
+			fr.close();
+						
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 	}
