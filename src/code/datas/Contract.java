@@ -38,14 +38,11 @@ public class Contract {
 	
 	public void printContractInfo() {
 		
-//		조경진(33세) : 010-5112-3237 같은 양식으로.
-		
 		System.out.println(String.format("%s(%d세) : %s", this.name, this.getKoreanAge(), this.phoneNum));
 	}
 	
 	public int getKoreanAge() {
 		
-//		지금 실행시점의 나이를 그때그때 계산.
 		Calendar now = Calendar.getInstance();
 		
 		return now.get(Calendar.YEAR)-this.birthYear+1;

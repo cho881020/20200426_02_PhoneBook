@@ -18,7 +18,6 @@ public class MainDrive {
 
 	public static void main(String[] args) {
 		
-//		프로그램 시작시 메뉴 출력
 		printMenu();
 		
 	}
@@ -52,7 +51,6 @@ public class MainDrive {
 				System.out.println("1/2/0 중에 입력해주세요.");
 				
 				try {
-//					프로그램 일시정지 코드 (1초)
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -69,17 +67,13 @@ public class MainDrive {
 	static void addPhoneNum() {
 		Scanner scan = new Scanner(System.in);
 		
-//		이름(String) / 생년(int) / 전화번호(String)
-		
 		System.out.println("*** 전화번호 등록 ***");
 		System.out.print("이름 입력 : ");
 		String inputName = scan.nextLine();
-//		이름에 ,가 들어있다면 -으로 강제 변환
 		inputName = inputName.replace(",", "-");
 		
 		System.out.print("생년 : ");
 		int inputYear = scan.nextInt();
-//		남아있는 엔터키를 제거하기 위한 문장.
 		scan.nextLine();
 		
 		Calendar now = Calendar.getInstance();
@@ -93,16 +87,11 @@ public class MainDrive {
 		
 		inputPhoneNum = inputPhoneNum.replace(",", "-");
 		
-//		System.out.println(String.format("%s / %d / %s", inputName, inputYear, inputPhoneNum));
-		
-//		입력된 항목들을 한줄의 String으로 묶어서 파일에 추가 저장.
 		File myPhoneBookFile = new File("phoneBook.csv");
 		
 		try {
 			FileWriter fw = new FileWriter(myPhoneBookFile, true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			
-//			이름,생년,폰번 => 한줄로 기록.
 			
 			String content = String.format("%s,%d,%s", inputName, inputYear, inputPhoneNum);
 			
@@ -113,7 +102,6 @@ public class MainDrive {
 			fw.close();
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -123,11 +111,8 @@ public class MainDrive {
 	
 	static void readAllPhoneNums() {
 		
-//		파일을 읽어서 모든 전화번호를 콘솔에 출력 (syso)
-		
 		File myFile = new File("phoneBook.csv");
 		
-//		연락처 목록을 담아둘 ArrayList
 		List<Contract> myContracts = new ArrayList<Contract>();
 		
 		try {
@@ -142,10 +127,6 @@ public class MainDrive {
 					break;
 				}
 				
-//				System.out.println(contentLine);
-				
-//				contentLine을 가지고 => Contract 객체로 변환.
-				
 				String[] infos = contentLine.split(",");
 				
 				Contract contract = new Contract(infos[0], Integer.parseInt(infos[1]), infos[2]);
@@ -159,20 +140,13 @@ public class MainDrive {
 			
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		
-//		파일에 있는 모든 연락처가 => myContracts에 Contract 형태로 옮겨담아짐.
-		
 		for (Contract c : myContracts) {
 			
-//			c의 정보를 가공해서 출력
-//			조경진(33세) : 010-5112-3237 같은 양식으로.
 			c.printContractInfo();
 			
 		}
