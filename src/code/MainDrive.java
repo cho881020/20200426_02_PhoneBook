@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -74,14 +75,25 @@ public class MainDrive {
 		System.out.print("이름 입력: ");
 		String inputName = scan.nextLine();
 		
+		inputName = inputName.replace(",", "-");
+		
 		System.out.print("생년: ");
 		int inputYear = scan.nextInt();
 		
 		scan.nextLine();
 		
+		Calendar now = Calendar.getInstance();
+		if (inputYear > now.get(Calendar.YEAR)) {
+			
+			System.out.println("출생년도는 올해보다 클수 없습니다.");
+			return;
+			
+		}
+		
 		System.out.print("전화번호: ");
 		String inputPhoneNum = scan.nextLine();
 		
+		inputPhoneNum = inputPhoneNum.replace(",", "-");
 		
 //		System.out.println(String.format("%s / %d / %s", inputName , inputYear , inputPhoneNum));
 		
