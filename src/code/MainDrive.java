@@ -7,7 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import code.datas.Contract;
 
 public class MainDrive {
 
@@ -108,6 +112,9 @@ public class MainDrive {
 		
 		File myFile = new File("phoneBook.csv");
 		
+//		연락처 목록을 담아둘 ArrayList
+		List<Contract> myContracts = new ArrayList<Contract>();
+		
 		try {
 			FileReader fr = new FileReader(myFile);
 			BufferedReader br = new BufferedReader(fr);
@@ -120,7 +127,14 @@ public class MainDrive {
 					break;
 				}
 				
-				System.out.println(contentLine);
+//				System.out.println(contentLine);
+				
+//				contentLine을 가지고 => contract 객체로 변환.
+				
+				String[] infos = contentLine.split(",");
+				
+				Contract contract = new Contract(infos[0], Integer.parseInt(infos[1]), infos[2]);
+				myContracts.add(contract);
 				
 			}
 			
@@ -135,6 +149,17 @@ public class MainDrive {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+//		파일에 있는 모든 연락처가 => myContracts에 Contract 형태로 옮겨담아짐.
+		
+		for (Contract c : myContracts) {
+			
+//			c의 정보를 가공해서 출력
+//			최진아(26세) : 010-8957-3251 같은 양식으로.
+			c.printContractInfo();
+			
+		}
+		
 		
 	}
 	

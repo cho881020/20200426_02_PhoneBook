@@ -1,5 +1,7 @@
 package code.datas;
 
+import java.util.Calendar;
+
 public class Contract {
 	
 	private String name;
@@ -31,6 +33,21 @@ public class Contract {
 	}
 	public void setPhoneNum(String phoneNum) {
 		this.phoneNum = phoneNum;
+	}
+	
+	
+	public void printContractInfo() {
+		
+		System.out.println(String.format("%s(%d세) : %s", this.name, getKoreanAge() , this.phoneNum));
+	
+	}
+	
+	public int getKoreanAge() {
+		
+//		실행시점의 나이를 그때그때 계산.
+		Calendar now = Calendar.getInstance();
+		
+		return now.get(Calendar.YEAR) - this.birthYear + 1;
 	}
 	
 	
