@@ -28,7 +28,8 @@ public class MainDrive {
 				break;
 			}
 			else if(userInput == 1) {
-//				TODO - 전화번호 등록 기능 수행
+//				전화번호 등록 기능 수행
+				addPhoneNum();
 			}
 			else if(userInput == 2) {
 //				TODO - 모든 전화번호 목록 출력
@@ -47,6 +48,26 @@ public class MainDrive {
 			}
 			
 		}
+		
+	}
+	
+	static void addPhoneNum(){
+		Scanner scan = new Scanner(System.in);
+//		이름(String) / 생년(int) / 전화번호(String)
+		
+		System.out.println("*** 전화번호 등록 ***");
+		System.out.print("이름 읿력 : ");
+		String inputName = scan.nextLine();
+		
+		System.out.print("생년 : ");
+		int inputYear = scan.nextInt();
+//		남아 있는 엔터키를 제거하기 위한 문장
+		scan.nextLine();
+		
+		System.out.print("전화번호 : ");
+		String inputPhoneNum = scan.nextLine();
+		
+		System.out.println(String.format("%s / %d / %s", inputName, inputYear, inputPhoneNum));
 		
 	}
 }
