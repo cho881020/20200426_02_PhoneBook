@@ -83,7 +83,7 @@ public class MainDrive {
 //		FileWriter fw = new FileWriter(myPhoneBookFile); 생성후 예외 처리
 		try {
 			FileWriter fw = new FileWriter(myPhoneBookFile, true);
-			BufferedWriter bw= new BufferedWriter(fw);
+			BufferedWriter bw = new BufferedWriter(fw);
 			
 //			이름 / 생년 /폰번  => 한줄로 기록.
 			
