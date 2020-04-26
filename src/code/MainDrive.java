@@ -168,6 +168,8 @@ public class MainDrive {
 		}
 //		파일에 있는 모든연락처가 => myContracts에 Contract형태로 옮겨담아짐.
 		
+		System.out.println(String.format("총 d개의 연락처 등록됨", myContracts.size));
+		
 		for(Contract c : myContracts) {
 //			C의 정보를 가공해서 출력 
 //			조경진 (33세) : 010-5112-3237 같은양식으로
