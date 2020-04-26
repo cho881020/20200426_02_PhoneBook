@@ -7,7 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import code.datas.Contract;
 
 public class MainDrive {
 
@@ -59,6 +63,8 @@ public class MainDrive {
 		
 	}
 	
+	
+//	1. 전화번호 등록
 	static void addPhoneNum(){
 		Scanner scan = new Scanner(System.in);
 //		이름(String) / 생년(int) / 전화번호(String)
@@ -101,11 +107,15 @@ public class MainDrive {
 		
 	}
 	
+	
+//	2. 전화번호 목록 조회
 	static void readAllPhoneNums() {
 		
 //		파일을 읽어서 모든 전화번호를 콘솔에 출력(syso)
 		File myFile = new File("phoneBook.csv");
 		
+//		연락처 목록을 담아둘 ArryList
+		List<Contract> myContracts = new ArrayList<Contract>();
 		try {
 			FileReader fr = new FileReader(myFile);
 			BufferedReader br = new BufferedReader(fr);
@@ -119,7 +129,14 @@ public class MainDrive {
 					break;
 				}
 				
-				System.out.println(contentLine);
+//				System.out.println(contentLine);
+				
+//				contractLine을 가지고 => contract 객체로 변환
+				String[] infos = contentLine.split(",");
+				
+				Contract contract = new Contract(infos[0], Integer.parseInt(infos[1]), infos[2]);
+				
+				myContracts.add(contract);
 			}
 			
 			br.close();
@@ -131,6 +148,15 @@ public class MainDrive {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	
+//		파일에 있는 모든 연락처가 => myContracts 에 Contract 형태로 옯겨 담아짐
+		
+		for (Contract c : myContracts) {
+//			c의 정보를 가공해서 출력
+//			조경진(33세) : 010-5112-3237 같은 양식으로.
+			c.printContractInfo();
+			
 		}
 		
 	}

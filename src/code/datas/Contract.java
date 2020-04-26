@@ -1,12 +1,14 @@
 package code.datas;
 
-public class contract {
+import java.util.Calendar;
+
+public class Contract {
 	
 	private String name;
 	private int birthYear;
 	private String phoneNUm;
 	
-	public contract(String name, int birthYear, String phoneNUm) {
+	public Contract(String name, int birthYear, String phoneNUm) {
 		super();
 		this.name = name;
 		this.birthYear = birthYear;
@@ -31,6 +33,20 @@ public class contract {
 	}
 	public void setPhoneNUm(String phoneNUm) {
 		this.phoneNUm = phoneNUm;
+	}
+	
+	
+	public void printContractInfo() {
+//		조경진(33세) : 010-5112-3237 같은 양식으로.
+		System.out.println(String.format("%s(%d세) : %d", this.name, this.getKoreanAge(), this.phoneNUm));
+	}
+	
+	public int getKoreanAge() {
+		
+//		지금 실행 시점의 나이를 그때그때 계산.
+		Calendar now = Calendar.getInstance();
+		
+		return now.get(Calendar.YEAR) - this.birthYear;
 	}
 
 }
