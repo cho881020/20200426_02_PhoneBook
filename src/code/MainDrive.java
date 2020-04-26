@@ -145,6 +145,8 @@ public class MainDrive {
 			e.printStackTrace();
 		}
 		
+		System.out.println(String.format("총 %d개의 연락처 등록됨", myContracts.size()));
+		
 		for (Contract c : myContracts) {
 			
 			c.printContractInfo();
