@@ -168,9 +168,11 @@ public class MainDrive {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
+		System.out.println(String.format("총 %d개의 연락처 등록 됨", myContracts.size()));
 	
 //		파일에 있는 모든 연락처가 => myContracts 에 Contract 형태로 옯겨 담아짐
-		
 		for (Contract c : myContracts) {
 //			c의 정보를 가공해서 출력
 //			조경진(33세) : 010-5112-3237 같은 양식으로.
