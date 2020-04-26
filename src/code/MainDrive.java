@@ -1,5 +1,9 @@
 package code;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MainDrive {
@@ -74,8 +78,31 @@ public class MainDrive {
 		
 		System.out.print("전화번호 : ");
 		String inputPhone = scan.nextLine();
+	
+//		System.out.println(String.format("%s / %d / %s", inputName, inputYear, inputPhone));
+
+//		입력된 항목들을 한줄의 String으로 묶어서 파일에 추가저장.
+		File myPhoneBookFile = new File("phoneBook.csv");
 		
-		System.out.println(String.format("%s / %d / %s", inputName, inputYear, inputPhone));
+		try {
+			FileWriter fw = new FileWriter(myPhoneBookFile, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+//			이름/생년/폰번 한줄에 
+			
+			String content = String.format("%s,%d,%s",inputName, inputYear, inputPhone);
+			
+			bw.append(content);
+			bw.newLine();
+			
+			bw.close();
+			fw.close();
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }
