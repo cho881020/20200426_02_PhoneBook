@@ -161,6 +161,8 @@ public class MainDrive {
 			e.printStackTrace();
 		}
 		
+		System.out.println(String.format("총  %d개의 연락처 등록 됨.", myContracts.size()));
+		
 //		파일에 있는 모든 연락처가 => myContracts에 Contract 형태로 옮겨담아짐.
 		
 		for (Contract c : myContracts) {
