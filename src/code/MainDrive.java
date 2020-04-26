@@ -43,7 +43,7 @@ public class MainDrive {
 			}
 
 			else if (userInput == 1) {
-				
+
 				addPhoneNum();
 
 			} else if (userInput == 2) {
@@ -66,100 +66,89 @@ public class MainDrive {
 		}
 
 	}
-	
+
 	static void addPhoneNum() {
-		
+
 		Scanner scan = new Scanner(System.in);
-		
+
 		System.out.println("*** 전화번호 등록 ***");
 		System.out.print("이름 입력: ");
 		String inputName = scan.nextLine();
-		
+
 		inputName = inputName.replace(",", "-");
-		
+
 		System.out.print("생년: ");
 		int inputYear = scan.nextInt();
-		
+
 		scan.nextLine();
-		
+
 		Calendar now = Calendar.getInstance();
 		if (inputYear > now.get(Calendar.YEAR)) {
-			
+
 			System.out.println("출생년도는 올해보다 클수 없습니다.");
 			return;
-			
+
 		}
-		
+
 		System.out.print("전화번호: ");
 		String inputPhoneNum = scan.nextLine();
-		
+
 		inputPhoneNum = inputPhoneNum.replace(",", "-");
-		
+
 //		System.out.println(String.format("%s / %d / %s", inputName , inputYear , inputPhoneNum));
-		
+
 		File myPhoneBookFile = new File("ohineBook.csv");
-		
+
 		try {
 			FileWriter fw = new FileWriter(myPhoneBookFile, true);
 			BufferedWriter bw = new BufferedWriter(fw);
-			
-			String content = String.format("%s,%d,%s",	inputName , inputYear , inputPhoneNum);
-			
+
+			String content = String.format("%s,%d,%s", inputName, inputYear, inputPhoneNum);
+
 			bw.append(content);
 			bw.newLine();
-			
-			
-			
+
 			bw.close();
 			fw.close();
-			
-			
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
+
 	}
-	
+
 	static void readPhoneNums() {
-		
+
 		File myFile = new File("ohineBook.csv");
-		
+
 		List<Contract> myContracts = new ArrayList<Contract>();
-		
-		
+
 		try {
 			FileReader fr = new FileReader(myFile);
 			BufferedReader br = new BufferedReader(fr);
-			
+
 			while (true) {
-				
+
 				String contentLine = br.readLine();
-				
+
 				if (contentLine == null) {
 					System.out.println("목록 전부 불러옴");
 					break;
-					
+
 				}
 //				System.out.println(contentLine);
-				
+
 				String[] infors = contentLine.split(",");
-				
+
 				Contract contract = new Contract(infors[0], Integer.parseInt(infors[1]), infors[2]);
 				myContracts.add(contract);
-				
-						
+
 			}
-			
+
 			br.close();
 			fr.close();
-						
-			
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -167,11 +156,12 @@ public class MainDrive {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		System.out.println(String.format("총 %d개의 연락처 등록됨", myContracts.size()));
+
 		for (Contract c : myContracts) {
 			c.printContractInfo();
 		}
-		
+
 	}
 
 }
