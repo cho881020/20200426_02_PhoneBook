@@ -1,5 +1,9 @@
 package code;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class MainDrive {
@@ -71,8 +75,30 @@ public class MainDrive {
 		String inputPhoneNum = scan.nextLine();
 		
 		
-		System.out.println(String.format("%s / %d / %s", inputName , inputYear , inputPhoneNum));
+//		System.out.println(String.format("%s / %d / %s", inputName , inputYear , inputPhoneNum));
 		
+		File myPhoneBookFile = new File("ohineBook.csv");
+		
+		try {
+			FileWriter fw = new FileWriter(myPhoneBookFile, true);
+			BufferedWriter bw = new BufferedWriter(fw);
+			
+			String content = String.format("%s,%d,%s",	inputName , inputYear , inputPhoneNum);
+			
+			bw.append(content);
+			bw.newLine();
+			
+			
+			
+			bw.close();
+			fw.close();
+			
+			
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
