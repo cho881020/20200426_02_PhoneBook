@@ -7,7 +7,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import code.datas.Contract;
 
 public class MainDrive {
 
@@ -114,6 +118,9 @@ public class MainDrive {
 		
 		File myFile = new File("ohineBook.csv");
 		
+		List<Contract> myContracts = new ArrayList<Contract>();
+		
+		
 		try {
 			FileReader fr = new FileReader(myFile);
 			BufferedReader br = new BufferedReader(fr);
@@ -127,8 +134,14 @@ public class MainDrive {
 					break;
 					
 				}
-				System.out.println(contentLine);
+//				System.out.println(contentLine);
 				
+				String[] infors = contentLine.split(",");
+				
+				Contract contract = new Contract(infors[0], Integer.parseInt(infors[1]), infors[2]);
+				myContracts.add(contract);
+				
+						
 			}
 			
 			br.close();
@@ -143,6 +156,9 @@ public class MainDrive {
 			e.printStackTrace();
 		}
 		
+		for (Contract c : myContracts) {
+			c.printContractInfo();
+		}
 		
 	}
 
