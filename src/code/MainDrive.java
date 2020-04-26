@@ -7,7 +7,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Scanner;
+
+import code.datas.Contract;
 
 public class MainDrive {
 
@@ -74,19 +79,35 @@ public class MainDrive {
 		System.out.println("*** 전화번호 등록 ***");
 		System.out.print("이름 입력 : ");
 		String inputName = scan.nextLine();
+		if(inputName.contains(",")) {
+			inputName = inputName.replace(".", "-");
+		}
 		
 		System.out.print("생년 : ");
 		int inputYear = scan.nextInt();
 //		남아있는 엔터키를 제거하기위한 문장.
 		scan.nextLine();
 		
+		Calendar now = Calendar.getInstance();
+		if(inputYear > now.get(Calendar.YEAR)) {
+			System.out.println("출생년도는 올해보다 클 수 없습니다.");
+			return;
+		}
+		
+		
 		System.out.print("전화번호 : ");
-		String inputPhone = scan.nextLine();
+		String inputPhoneNum = scan.nextLine();
 	
+		inputPhoneNum = inputPhoneNum.replace(",","-");
+		
 //		System.out.println(String.format("%s / %d / %s", inputName, inputYear, inputPhone));
 
 //		입력된 항목들을 한줄의 String으로 묶어서 파일에 추가저장.
 		File myPhoneBookFile = new File("phoneBook.csv");
+		
+//		연락처 목록을 담아둘 ArrayList
+		List<Contract> myContracts = new ArrayList<Contract>();
+//		List<Contract> myContracts = new ArrayList<Contract>();
 		
 		try {
 			FileWriter fw = new FileWriter(myPhoneBookFile, true);
@@ -94,7 +115,7 @@ public class MainDrive {
 			
 //			이름/생년/폰번 한줄에 
 			
-			String content = String.format("%s,%d,%s",inputName, inputYear, inputPhone);
+			String content = String.format("%s,%d,%s",inputName, inputYear, inputPhoneNum);
 			
 			bw.append(content);
 			bw.newLine();
@@ -123,7 +144,16 @@ public class MainDrive {
 					System.out.println("목록 전부 불러옴");
 					break;
 				}
-				System.out.println(contentLine);
+//				System.out.println(contentLine);
+				
+//				contentLine을 가지고 contract객체로 변환
+				String[] infos = contentLine.split(",");
+				
+				Contract contract = new Contract(infos[0], Integer.parseInt(infos[1]), infos[2]);
+				myContracts.add(contract);
+				
+			
+				
 			}
 			br.close();
 			fr.close();
@@ -136,7 +166,14 @@ public class MainDrive {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+//		파일에 있는 모든연락처가 => myContracts에 Contract형태로 옮겨담아짐.
 		
+		for(Contract c : myContracts) {
+//			C의 정보를 가공해서 출력 
+//			조경진 (33세) : 010-5112-3237 같은양식으로
+			c.printContractInfo();
+			
+		}
 	}
 
 }
